@@ -36,7 +36,7 @@ def run(token, date, ville):
     for col in df[["display_informations", "stop_date_time"]].columns:
         output.append(pd.json_normalize(df[col]))
     trains = pd.concat(output, axis=1)
-
+    trains["Gare"] = ville
     trains["arrival_date_time"] = pd.to_datetime(trains["arrival_date_time"])
     trains["base_arrival_date_time"] = pd.to_datetime(trains["base_arrival_date_time"])
     trains["delay"] = trains["arrival_date_time"] - trains["base_arrival_date_time"]
